@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Vaga</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+
+<body>
+    <div class="barra-de-topo">
+        <header class="header">
+            <a href="#" class="logo"><img src="imagens/logo.png" alt="Logo"></a>
+        </header>
+    </div>
+
+    <div class="content">
+        <div class="form-container">
+            <h2>Cadastrar Nova Vaga</h2>
+            
+            <input type="text" id="titulo" placeholder="Título da Vaga" required>
+            <input type="text" id="empresa" placeholder="Nome da Empresa" required>
+            
+            <select id="categoria" required>
+                <option value="">Selecione a Área</option>
+                <option value="Adm">Administração</option>
+                <option value="Mec">Mecânica</option>
+                <option value="TI">Tecnologia</option>
+            </select>
+
+            <input type="text" id="salario" placeholder="Salário (Ex: R$ 1.200,00)">
+            
+            <textarea id="requisitos" placeholder="Requisitos..." rows="3"></textarea>
+            <textarea id="beneficios" placeholder="Benefícios..." rows="3"></textarea>
+            <textarea id="contato" placeholder="Contato..." rows="2"></textarea>
+            <textarea id="descricao" placeholder="Descrição breve..." rows="2"></textarea>
+
+            <div class="btn-group">
+                <button type="button" id="btnCadastrar">
+                    Publicar Vaga
+                </button>
+
+                <a href="../Visualizacao/visualizacao.html" class="btn-voltar">
+                    Ver Vagas
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    document.getElementById('btnCadastrar').addEventListener('click', async (event) => {
+        event.preventDefault(); 
+        
+        const dados = {
+            titulo: document.getElementById('titulo').value,
+            empresa: document.getElementById('empresa').value,
+            categoria: document.getElementById('categoria').value,
+            salario: document.getElementById('salario').value,
+            requisitos: document.getElementById('requisitos').value,
+            beneficios: document.getElementById('beneficios').value,
+            contato: document.getElementById('contato').value,
+            descricao: document.getElementById('descricao').value
+        };
+
+        if (!dados.titulo || !dados.empresa) return alert("Preencha Título e Empresa!"); 
+
+        try {
+            const response = await fetch('http://localhost:3000/vagas', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(dados)
+            });
+
+            if(response.ok) {
+                // Tenta redirecionar automaticamente
+                if(confirm("✅ Vaga Cadastrada com Sucesso!")) {
+                    window.location.href = "../Visualizacao/visualizacao.html";
+                }
+            } else {
+                alert("Erro no servidor.");
+            }
+        } catch (e) {
+            alert("Erro de conexão.");
+        }
+    });
+    </script>
+</body>
+</html>

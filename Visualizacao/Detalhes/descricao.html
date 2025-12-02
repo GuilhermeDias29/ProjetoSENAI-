@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laguna School</title>
+    <link rel="stylesheet" href="descricao.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+
+</head>
+
+
+<body>
+    
+
+
+    <div class="barra-de-topo">
+
+
+        
+        <header class="header">
+            <a href="#" class="logo"><img src="imagens/logo.png"> </a>
+
+        </header>
+
+    </div>
+
+
+
+  
+
+  
+
+    </nav><!--menu-lateral-->
+
+    <div class="container">
+       
+
+        <div class="main-content">
+
+            <div class="atividade-box">
+    <h3 id="detalhe-titulo">Carregando...</h3>
+    
+    <p><strong>Empresa:</strong> <span id="detalhe-empresa">...</span></p>
+    <p><strong>Categoria:</strong> <span id="detalhe-categoria">...</span></p>
+    
+    <h2>💰 Salário: <span id="detalhe-salario">...</span></h2>
+    
+    <p> ✅ <strong>Requisitos:</strong><br> <span id="detalhe-requisitos">...</span></p>
+    <p> ✅ <strong>Benefícios:</strong><br> <span id="detalhe-beneficios">...</span></p>
+    <p> ✅ <strong>Contato:</strong><br> <span id="detalhe-contato">...</span></p>
+</div>
+            
+        </div>
+    </div>
+     
+
+    <script>
+    async function carregarDetalhes() {
+        // Pega o ID da URL (ex: ?id=1)
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        if(!id) return alert("Vaga não encontrada!");
+
+        const response = await fetch(`http://localhost:3000/vaga/${id}`);
+        const vaga = await response.json();
+
+        // Preenche a tela
+        document.getElementById('detalhe-titulo').innerText = vaga.titulo;
+        document.getElementById('detalhe-empresa').innerText = vaga.empresa;
+        document.getElementById('detalhe-categoria').innerText = vaga.categoria;
+        document.getElementById('detalhe-salario').innerText = vaga.salario;
+        document.getElementById('detalhe-requisitos').innerText = vaga.requisitos;
+        document.getElementById('detalhe-beneficios').innerText = vaga.beneficios;
+        document.getElementById('detalhe-contato').innerText = vaga.contato;
+    }
+
+    carregarDetalhes();
+</script>
+
+
+</body>
+</html>

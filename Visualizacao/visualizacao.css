@@ -1,0 +1,627 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.barra-de-topo {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 132px;
+    background: linear-gradient(135deg, Crimson, darkred);
+    color: white;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    padding: 1px;
+}
+
+.barra-de-topo .header {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.barra-de-topo .logo img {
+    max-width: 300px;
+    height: auto;
+}
+
+
+
+#btn-exp {
+    position: absolute; /* Posiciona o botão em relação à barra de topo */
+    top: 30px; /* Ajuste conforme necessário */
+    left: 20px; /* Ajuste conforme necessário */
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+   
+}
+
+
+
+
+nav.menu-lateral{
+    width: 80px;
+    height: 100vh;
+    background-color: Crimson;
+    padding: 40px 0 40px 1%;
+    box-shadow: 3px 0 0 darkred;
+
+    position: fixed;
+    top: 130px;
+    left: 0;
+    overflow: hidden;
+    transition: .5s;
+    z-index: 1000;
+    
+}
+
+
+
+nav.menu-lateral.expandir{
+    width: 300px;
+}
+
+.btn-expandir{
+    width: 100%;
+    padding-left: 20px;
+    padding-top: 40px;
+}
+
+.btn-expandir > i{
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+ul {
+    display: flex;
+    flex-direction: column; /* Alinha os itens em coluna */
+    padding: 0; /* Remove padding do ul */
+    margin: 0; /* Remove margem do ul */
+    list-style-type: none; /* Remove os marcadores da lista */
+    flex-grow: 1; /* Faz com que o ul ocupe o espaço restante */
+}
+
+ul li.item-menu{
+    transition: .2s;
+}
+
+ul li.ativo{
+    background-color: darkred;
+}
+
+ul li.item-menu:hover{
+    background: darkred;
+}
+
+ul li.item-menu a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display: flex;
+    margin-bottom: 10px;
+    line-height: 30px;
+}
+
+ul li.item-menu a .txt-link{
+    margin-left: 70px;
+    transition: .5s;
+    opacity: 0;
+}
+
+nav.menu-lateral.expandir .txt-link{
+    margin-left: 40px;
+    opacity: 1;
+}
+
+ul li.item-menu a .icon > i{
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.item-menu.sair {
+    position: absolute; /* Faz o item "Sair" ser posicionado de forma absoluta */
+    bottom: 20px; /* Ajuste a distância do fundo */
+    left: 10px; /* Ajuste a distância da esquerda */
+    width: calc(100% - 20px); /* Largura total menos as margens */
+}
+.header{
+
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: 
+    'header header header'
+    'sidenav content anuncios'
+    'footer footer footer';
+
+
+
+
+}
+
+.header {
+    display: flex; /* Use flexbax para centralização */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    background: linear-gradient(135deg, Crimson, darkred);
+    padding: 1px;
+    height: 132px;
+}
+
+
+
+.logo img {
+    max-width: 300px; /* Ajuste a largura máxima conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+
+
+.header nav ul{
+
+
+    display: flex;
+
+
+}
+
+
+
+/* Título centralizado */
+.activities-profile-container h2 {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 20px; /* Adiciona um espaçamento */
+}
+
+/* Grid de Atividades */
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta dinamicamente */
+    gap: 20px;
+}
+
+
+.btn-visualizar {
+    background: linear-gradient(to right, red, rgb(94, 10, 10));
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative; /* Garante que o bottom funcione dentro do fluxo normal */
+    bottom: -12px; /* Move o botão para baixo (valores negativos descem) */
+}
+
+.btn-visualizar:hover {
+    background-color: darkred;
+}
+
+
+
+.pending-activities {
+    flex: 2; /* Ajusta a largura relativa */
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    display: flex; /* Define como flex container */
+    flex-direction: column; /* Alinha itens verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    text-align: center; /* Garante alinhamento do texto */
+}
+
+.pending-activities h2 {
+    margin-bottom: 20px; /* Espaço entre o título e o conteúdo */
+    font-size: 35px;
+    font-weight: 1000;
+    color: #000000; /* Cor do título */
+}
+
+
+/* Perfil do usuário */
+.profile-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+.profile-card {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 100px;
+    text-align: center;
+    width: 400px;
+    font-family: Arial, sans-serif;
+}
+
+.profile-header {
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    position: relative;
+    width: 10px;
+    height: 70px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-color: #9C27B0;
+    color: #fff;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.manage-profile {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.profile-services h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.services-grid a img {
+    width: 40px;
+    height: 40px;
+}
+
+.profile-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.help-link {
+    color: #E53935;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.logout-link {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+
+  
+
+  
+
+/* Container Principal */
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 140px;
+}
+
+/* Wrapper para organizar os dois elementos lado a lado */
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Estilo para Atividades Pendentes */
+.pending-activities {
+    flex: 2; /* Maior largura */
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas */
+    gap: 50px;
+}
+
+.activity-card {
+    position: relative;
+    padding: 40px; /* Espaçamento interno para o conteúdo */
+    border-radius: 10px;
+    background-color: #fff; /* Fundo do cartão */
+    z-index: 1; /* Garante que o conteúdo esteja acima */
+    overflow: hidden; /* Impede que o pseudo-elemento extrapole os cantos */
+}
+
+/* Pseudo-elemento para a borda animada */
+
+/* Animação da borda */
+@keyframes borderAnimation {
+    0% {
+        background: linear-gradient(to right, red, rgb(94, 10, 10));
+    }
+    50% {
+        background: linear-gradient(to right, rgb(94, 10, 10), red);
+    }
+    100% {
+        background: linear-gradient(to right, red, rgb(94, 10, 10));
+    }
+}
+
+
+
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    background-color: #6c63ff;
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative;
+}
+
+
+
+.edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+
+
+/* Adicionar responsividade */
+@media (max-width: 768px) {
+    nav.menu-lateral {
+        position: fixed;
+        width: 80px; /* Largura reduzida */
+        height: 100%;
+        top: 132px; /* Ajustar para a barra de topo */
+        left: 0;
+    }
+
+    .menu-lateral.expandir {
+        width: 250px; /* Largura ao expandir */
+    }
+
+    .container {
+        flex-direction: column; /* Colocar os itens em coluna no mobile */
+        margin-left: 80px; /* Evitar sobreposição */
+        padding: 20px;
+    }
+
+    .menu-lateral.expandir ~ .container {
+        margin-left: 250px; /* Ajustar espaço quando expandir */
+    }
+
+    .content-wrapper {
+        flex-direction: column; /* Conteúdo em coluna no mobile */
+        gap: 20px;
+    }
+
+    .activities-grid {
+        grid-template-columns: 1fr; /* Uma coluna no mobile */
+    }
+
+    .pending-activities {
+        margin-left: 0; /* Centralizar no mobile */
+    }
+
+    .profile-section {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 769px) {
+    nav.menu-lateral {
+        position: fixed;
+        width: 80px;
+        height: calc(100vh - 132px); /* Ajuste dinâmico para a altura */
+        top: 132px;
+        left: 0;
+    }
+
+    .menu-lateral.expandir {
+        width: 300px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row; /* Itens lado a lado */
+        margin-left: 80px; /* Margem inicial */
+        transition: margin-left 0.3s ease;
+    }
+
+    .menu-lateral.expandir ~ .container {
+        margin-left: 300px; /* Ajustar espaço quando expandir */
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex-direction: row; /* Atividades e perfil lado a lado */
+        gap: 20px;
+    }
+
+    .activities-grid {
+        grid-template-columns: repeat(2, 1fr); /* Duas colunas no desktop */
+    }
+}
+
+.nmr {
+    color: red;
+    font-weight: bold;
+}
+
+/* --- ESTILO DA BARRA DE PESQUISA (ALINHADO À ESQUERDA) --- */
+
+.search-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* Mudamos de center para flex-start (esquerda) */
+    align-items: flex-start; 
+    margin: 20px 0 30px 0;
+    width: 100%;
+}
+
+/* A caixa branca arredondada */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    width: 100%;
+    /* Aumentei um pouco o max-width para preencher melhor a esquerda */
+    max-width: 700px; 
+    border: 1px solid #eee;
+}
+
+/* Ícone de lupa */
+.search-bar i.bi-search {
+    font-size: 1.2rem;
+    color: #888;
+    margin-right: 15px;
+}
+
+/* O campo de digitar */
+.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Botão de filtro (lado direito) */
+.filter-btn {
+    background-color: #f0f0f0;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* --- AS TAGS EMBAIXO (Categorias) --- */
+.tags-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    /* Mudamos de center para flex-start */
+    justify-content: flex-start; 
+}
+
+.tag {
+    padding: 8px 20px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    transition: all 0.3s;
+    font-family: 'Outfit', sans-serif;
+}
+
+.tag.active, .tag:hover {
+    background-color: #111;
+    color: white;
+    border-color: #111;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    /* No celular, forçamos o centro novamente para ficar bonito na tela pequena */
+    .search-wrapper {
+        align-items: center;
+    }
+    
+    .tags-container {
+        justify-content: center;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+    
+    .activities-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

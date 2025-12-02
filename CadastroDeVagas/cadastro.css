@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Barra de topo (Cabeçalho) */
+.barra-de-topo {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 132px;
+    background: linear-gradient(135deg, Crimson, darkred);
+    color: white;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    padding: 1px;
+}
+
+.barra-de-topo .header {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.barra-de-topo .logo img {
+    max-width: 300px;
+    height: auto;
+}
+
+/* Botão expansível */
+#btn-exp {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Menu lateral (Sidebar) */
+nav.menu-lateral {
+    width: 80px;
+    height: calc(100% - 132px); /* Ajustado para não sobrepor o cabeçalho */
+    background-color: Crimson;
+    padding: 40px 0 40px 1%;
+    box-shadow: 3px 0 0 darkred;
+    position: fixed;
+    top: 132px;
+    left: 0;
+    overflow: hidden;
+    transition: .5s;
+}
+
+nav.menu-lateral.expandir {
+    width: 300px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    flex-grow: 1;
+}
+
+ul li.item-menu {
+    transition: .2s;
+}
+
+ul li.ativo {
+    background-color: darkred;
+}
+
+ul li.item-menu:hover {
+    background: darkred;
+}
+
+ul li.item-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display: flex;
+    margin-bottom: 10px;
+    line-height: 30px;
+}
+
+ul li.item-menu a .txt-link {
+    margin-left: 70px;
+    transition: .5s;
+    opacity: 0;
+}
+
+nav.menu-lateral.expandir .txt-link {
+    margin-left: 40px;
+    opacity: 1;
+}
+
+ul li.item-menu a .icon > i {
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.item-menu.sair {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    width: calc(100% - 20px);
+}
+
+/* Conteúdo principal */
+.content {
+    margin-left: 80px; /* Ajuste para quando o menu está retraído */
+    margin-top: 132px; /* Espaço para o cabeçalho */
+    padding: 20px;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+    transition: margin-left 0.5s; /* Transição suave ao expandir/retrair o menu */
+}
+
+nav.menu-lateral.expandir ~ .content {
+    margin-left: 300px; /* Ajuste quando o menu está expandido */
+}
+
+/* Container de formulário */
+.form-container {
+    background-color: white;
+    padding: 70px;
+    border-radius: 8px;
+    max-width: 60%;
+    margin: 30px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs e elementos do formulário */
+.form-container select,
+.form-container input[type="text"],
+.form-container textarea,
+.form-container input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.form-container button {
+    background-color: #e5001b;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s, transform 0.2s, opacity 0.2s; /* Transições suaves */
+}
+
+.form-container button:active {
+    transform: scale(0.95); /* Reduz o tamanho do botão quando pressionado */
+    opacity: 0.8; /* Torna o botão ligeiramente transparente quando pressionado */
+}
+
+
+
+/* Estilos específicos para labels e datas */
+label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+input[type="date"] {
+    padding: 5px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Animação de pulsar */
+.pulsar {
+    animation: pulsar 0.5s forwards;
+}
+
+@keyframes pulsar {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Media queries para responsividade */
+@media (min-width: 768px) {
+    .form-container {
+        max-width: 650px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .form-container {
+        max-width: 800px;
+    }
+}
+
+/* Mensagem de sucesso */
+#success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    animation: fadeIn 1s ease-in-out;
+}
+
+#success-message h2 {
+    color: #28a745;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+#success-message p {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#success-message.hidden {
+    display: none;
+}
+
+.back-button {
+    position: sticky;
+    top: 190px; /* Fixa o botão 190px do topo da tela ao rolar */
+    z-index: 1000;
+}
+
+.back-button .btn {
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: #000;
+    font-size: 18px;
+}
+
+.back-button .btn:hover {
+    color: #ff0000;
+}
+
+
+/* --- ADICIONE ISTO AO FINAL DO SEU ARQUIVO cadastro.css --- */
+
+/* Container dos botões (para ficarem lado a lado) */
+.btn-group {
+    display: flex;
+    gap: 10px; /* Espaço entre os botões */
+    margin-top: 20px;
+}
+
+/* Estilo do Botão VERMELHO (Publicar) */
+#btnCadastrar {
+    flex: 2; /* Ocupa mais espaço (2 partes) */
+    padding: 12px;
+    background: darkred;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+#btnCadastrar:hover {
+    background: #800000; /* Escurece ao passar o mouse */
+}
+
+/* Estilo do Botão CINZA (Voltar/Ver Vagas) */
+.btn-voltar {
+    flex: 1; /* Ocupa menos espaço (1 parte) */
+    text-decoration: none;
+    background-color: #666;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #444; /* Escurece ao passar o mouse */
+}

@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    min-height: 100vh; /* Permite scroll se o conteúdo for grande */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BARRA DE TOPO --- */
+.barra-de-topo {
+    width: 100%;
+    height: 100px; /* Altura fixa para o topo */
+    background: linear-gradient(135deg, Crimson, darkred);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 10;
+}
+
+.barra-de-topo .logo img {
+    max-width: 200px; /* Logo menor para não ocupar muito */
+    height: auto;
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px; /* Espaço nas laterais em celulares */
+    flex: 1; /* Ocupa o resto da tela */
+}
+
+.main-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- A CAIXA DE CONTEÚDO (Onde estava o problema) --- */
+.atividade-box {
+    background-color: white;
+    width: 100%; 
+    max-width: 800px; /* Trava no tamanho máximo, mas diminui se precisar */
+    height: auto; /* Altura ajustável ao texto */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    
+    /* Removemos o position: absolute que quebrava o layout mobile */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 5px solid crimson; /* Detalhe visual */
+}
+
+/* Títulos */
+.atividade-box h3 {
+    font-size: 24px;
+    color: #b80000;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.atividade-box h2 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 15px;
+}
+
+.atividade-box p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.6; /* Melhora leitura */
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Estilizando os dados dinâmicos (spans) */
+.atividade-box span {
+    font-weight: bold;
+    color: #000;
+}
+
+/* --- RESPONSIVIDADE (CELULAR) --- */
+@media (max-width: 600px) {
+    .atividade-box {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .atividade-box h3 {
+        font-size: 20px;
+    }
+
+    .atividade-box h2 {
+        font-size: 16px;
+    }
+
+    .atividade-box p {
+        font-size: 14px;
+    }
+    
+    .barra-de-topo .logo img {
+        max-width: 150px;
+    }
+}
