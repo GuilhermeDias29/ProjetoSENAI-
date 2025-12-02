@@ -45,7 +45,7 @@ db.serialize(() => {
 
 // --- ROTAS ---
 
-// Rota de Login (Igual a anterior)
+// Rota de Login 
 app.post("/login", (req, res) => {
     const { email, cpf } = req.body;
     db.get("SELECT * FROM usuario WHERE email = ? AND cpf = ?", [email, cpf], (err, row) => {
@@ -54,7 +54,7 @@ app.post("/login", (req, res) => {
     });
 });
 
-// 1. CADASTRAR VAGA (Admin)
+// 1. CADASTRAR VAGA 
 app.post("/vagas", (req, res) => {
     const { titulo, empresa, categoria, salario, requisitos, beneficios, contato, descricao } = req.body;
     
