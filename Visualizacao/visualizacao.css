@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    min-height: 100vh;
+}
+
+/* --- HEADER --- */
+.barra-de-topo {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 132px;
+    background: linear-gradient(135deg, Crimson, darkred);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.barra-de-topo .logo img {
+    max-width: 300px;
+    height: auto;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 150px; /* Espaço para o header */
+    width: 100%;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px; /* Limita a largura em telas grandes */
+}
+
+/* --- SEÇÃO DE TOPO (Título e Botões) --- */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Permite quebrar linha no celular */
+    gap: 15px;
+}
+
+.top-header h2 {
+    color: #333;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Botão Sair no Topo */
+.btn-sair-topo {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-sair-topo:hover {
+    background-color: black;
+}
+
+/* --- BARRA DE PESQUISA --- */
+.search-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.search-bar i.bi-search {
+    font-size: 1.2rem;
+    color: #888;
+    margin-right: 15px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+.filter-btn {
+    margin-left: 10px;
+    color: #888;
+}
+
+/* Tags */
+.tags-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 8px 20px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    transition: all 0.3s;
+}
+
+.tag.active, .tag:hover {
+    background-color: #111;
+    color: white;
+    border-color: #111;
+}
+
+/* --- GRID DE VAGAS --- */
+.activities-grid {
+    display: grid;
+    /* Cria colunas automáticas. Mínimo de 300px, máximo ocupa o que der */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px;
+}
+
+.activity-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.activity-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #b80000;
+}
+
+.activity-card p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Botão Visualizar no Card */
+.btn-visualizar {
+    background: linear-gradient(to right, red, rgb(94, 10, 10));
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 14px;
+    width: 100%; /* Botão largo no celular fica melhor */
+}
+
+.btn-visualizar:hover { background: darkred; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .barra-de-topo .logo img { max-width: 200px; }
+    .container { padding: 10px; margin-top: 140px; }
+    
+    .top-header { flex-direction: column; align-items: flex-start; }
+    .btn-sair-topo { width: 100%; justify-content: center; }
+    
+    /* Em telas muito pequenas, 1 coluna */
+    .activities-grid { grid-template-columns: 1fr; }
+}

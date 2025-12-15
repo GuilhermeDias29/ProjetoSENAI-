@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Vaga</title>
+    <link rel="stylesheet" href="descricao.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="barra-de-topo">
+        <header class="header">
+            <a href="#" class="logo"><img src="imagens/logo.png" alt="Logo"></a>
+        </header>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="atividade-box">
+                <h3 id="detalhe-titulo">Carregando...</h3>
+
+                <p><strong>Empresa:</strong> <span id="detalhe-empresa">...</span></p>
+                <p><strong>Categoria:</strong> <span id="detalhe-categoria">...</span></p>
+
+                <h2>💰 Salário: <span id="detalhe-salario">...</span></h2>
+
+                <p> ✅ <strong>Requisitos:</strong><br> <span id="detalhe-requisitos">...</span></p>
+                <p> ✅ <strong>Benefícios:</strong><br> <span id="detalhe-beneficios">...</span></p>
+                <p> ✅ <strong>Contato:</strong><br> <span id="detalhe-contato">...</span></p>
+                
+                <div class="btn-area">
+                    <button onclick="window.history.back()" class="btn-voltar">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = "../Login/login.html";
+        }
+
+        async function carregarDetalhes() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (!id) return alert("Vaga não encontrada!");
+
+            try {
+                const response = await fetch(`http://localhost:3000/vaga/${id}`);
+                const vaga = await response.json();
+
+                document.getElementById('detalhe-titulo').innerText = vaga.titulo;
+                document.getElementById('detalhe-empresa').innerText = vaga.empresa;
+                document.getElementById('detalhe-categoria').innerText = vaga.categoria;
+                document.getElementById('detalhe-salario').innerText = vaga.salario;
+                document.getElementById('detalhe-requisitos').innerText = vaga.requisitos;
+                document.getElementById('detalhe-beneficios').innerText = vaga.beneficios;
+                document.getElementById('detalhe-contato').innerText = vaga.contato;
+            } catch (error) {
+                console.error(error);
+                document.getElementById('detalhe-titulo').innerText = "Erro ao carregar.";
+            }
+        }
+        carregarDetalhes();
+    </script>
+</body>
+</html>

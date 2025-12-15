@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagas</title>
+    <link rel="stylesheet" href="visualizacao.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="barra-de-topo">
+        <header class="header">
+            <a href="#" class="logo"><img src="imagens/logo.png" alt="Logo"></a>
+        </header>
+    </div>
+
+    <div class="container">
+        <div class="content-wrapper">
+            
+            <div class="top-header">
+                <h2>Encontre a sua Vaga</h2>
+                <button id="btn-sair" class="btn-sair-topo">
+                    <i class="bi bi-box-arrow-right"></i> Sair
+                </button>
+            </div>
+            
+            <div class="top-section">
+                <div class="search-wrapper">
+                    <div class="search-bar">
+                        <i class="bi bi-search"></i>
+                        <input type="text" id="search-input" placeholder="Pesquisar vaga...">
+                        <div class="filter-btn">
+                            <i class="bi bi-sliders"></i>
+                        </div>
+                    </div>
+                    <div class="tags-container">
+                        <button class="tag active" data-cat="todas">Todas</button>
+                        <button class="tag" data-cat="Adm">Adm</button>
+                        <button class="tag" data-cat="Mec">Mecânica</button>
+                        <button class="tag" data-cat="TI">TI</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pending-activities">
+                <div class="activities-grid">
+                    </div>
+                <p id="msg-sem-vagas" style="display:none; text-align:center; margin-top:20px;">🚫 Nenhuma vaga encontrada.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        // 1. VERIFICAÇÃO DE SEGURANÇA
+        const token = localStorage.getItem('token');
+        if (!token) {
+             window.location.href = "../Login/login.html";
+        }
+
+        // 2. Botão Sair
+        $('#btn-sair').click(function() {
+            localStorage.clear();
+            window.location.href = "../Login/login.html";
+        });
+
+        const tipoUsuario = localStorage.getItem('tipoUsuario');
+        let filtroCategoria = 'todas';
+
+        // Botão Nova Vaga (Apenas Admin)
+        if (tipoUsuario === 'admin') {
+            $('.top-section').prepend(`
+                <button onclick="window.location.href='../CadastroDeVagas/cadastro.html'" 
+                style="background:darkred; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer; margin-bottom:15px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+                    <i class="bi bi-plus-circle"></i> Nova Vaga
+                </button>
+            `);
+        }
+
+        function carregarVagas() {
+            $.get('http://localhost:3000/vagas', function(vagas) {
+                const container = $('.activities-grid');
+                container.empty();
+
+                if(vagas.length === 0) {
+                    container.append('<p>Nenhuma vaga disponível.</p>');
+                    return;
+                }
+
+                vagas.forEach(vaga => {
+                    let btnExcluir = '';
+                    if (tipoUsuario === 'admin') {
+                        btnExcluir = `<button class="btn-excluir" data-id="${vaga.id}" style="background:red; color:white; border:none; padding:8px; margin-top:10px; cursor:pointer; border-radius:5px; width:100%;">Excluir</button>`;
+                    }
+
+                   
+                    const cardHtml = `
+                        <div class="activity-card" id="card-${vaga.id}" data-categoria="${vaga.categoria}" data-titulo="${vaga.titulo.toLowerCase()}" data-empresa="${vaga.empresa.toLowerCase()}">
+                            <h3>${vaga.titulo}</h3>
+                            <p><strong>${vaga.empresa}</strong></p>
+                            
+                            <button class="btn-visualizar" onclick="window.location.href='../Visualizacao/Detalhes/descricao.html?id=${vaga.id}'">
+                                Visualizar
+                            </button>
+                            ${btnExcluir}
+                        </div>
+                    `;
+                    container.append(cardHtml);
+                });
+            });
+        }
+
+        // Filtros
+        $('#search-input').on('input', filtrarTudo);
+        $('.tag').click(function() {
+            $('.tag').removeClass('active');
+            $(this).addClass('active');
+            filtroCategoria = $(this).data('cat');
+            filtrarTudo();
+        });
+
+        function filtrarTudo() {
+            const termo = $('#search-input').val().toLowerCase();
+            let visiveis = 0;
+            $('.activity-card').each(function() {
+                const card = $(this);
+                const titulo = card.data('titulo');
+                const empresa = card.data('empresa');
+                const catCard = card.data('categoria');
+                
+                const textoOk = titulo.includes(termo) || empresa.includes(termo);
+                const catOk = (filtroCategoria === 'todas') || (catCard === filtroCategoria);
+
+                if (textoOk && catOk) { card.fadeIn(); visiveis++; } else { card.hide(); }
+            });
+            if(visiveis === 0) $('#msg-sem-vagas').show(); else $('#msg-sem-vagas').hide();
+        }
+
+        // Excluir
+        $(document).on('click', '.btn-excluir', function() {
+            const id = $(this).data('id');
+            if(confirm("Excluir vaga?")) {
+                $.ajax({ url: `http://localhost:3000/vagas/${id}`, type: 'DELETE', success: function() { $(`#card-${id}`).fadeOut(); } });
+            }
+        });
+
+        carregarVagas();
+    });
+    </script>
+</body>
+</html>

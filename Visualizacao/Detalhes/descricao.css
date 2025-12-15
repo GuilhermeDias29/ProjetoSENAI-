@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+/* --- BARRA DE TOPO --- */
+.barra-de-topo {
+    position: fixed; /* Fixa no topo */
+    top: 0;
+    width: 100%;
+    height: 132px;
+    background: linear-gradient(135deg, Crimson, darkred);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.barra-de-topo .logo img {
+    max-width: 300px;
+    height: auto;
+}
+
+/* --- CONTEÚDO --- */
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 150px; /* Espaço para não ficar atrás do topo */
+    width: 100%;
+}
+
+.main-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- CAIXA DA VAGA --- */
+.atividade-box {
+    background-color: white;
+    width: 100%;
+    max-width: 800px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-top: 5px solid crimson;
+}
+
+.atividade-box h3 {
+    font-size: 28px;
+    color: #b80000;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.atividade-box h2 {
+    font-size: 20px;
+    color: #333;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.atividade-box p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+/* --- BOTÃO VOLTAR --- */
+.btn-area {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-voltar {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 50px; /* Borda redonda */
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-voltar:hover {
+    background-color: #333;
+    transform: scale(1.05); 
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .barra-de-topo .logo img { max-width: 200px; }
+    .container { padding: 10px; margin-top: 140px; }
+    .atividade-box { padding: 20px; }
+}
